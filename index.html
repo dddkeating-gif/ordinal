@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Spectrum Sorting Game</title>
+  <titleOrdinal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
@@ -48,8 +48,9 @@
 <body>
   <div class="layout">
     <section class="left-panel">
-      <h1>Spectrum Sort</h1>
+      <h1>Ordinal</h1>
       <p class="subtitle">
+ 
         Drag the tiles on the right until you think they’re in the correct order.
         Then hit “Check order” to see how close you are.
       </p>
@@ -67,8 +68,11 @@
     <section class="right-panel">
       <ul id="tiles" class="tiles"></ul>
     </section>
+  
   </div>
   <script>
+
+    
     const puzzle = {
       clue: "Arrange the items from lowest to highest in terms of vertical position relative to Earth’s surface.",
       itemsInCorrectOrder: [
@@ -189,9 +193,20 @@
       messageEl.className = "ok";
     });
     document.getElementById("toggleClue").addEventListener("click", () => {
-      clueEl.style.display = clueEl.style.display === "none" ? "block" : "none";
-    });
-    renderTiles(shuffle(puzzle.itemsInCorrectOrder));
+      clueEl.style.display = clueEl.style.display === "none" ? "block" : "none
+      // Load SortableJS for mobile drag support
+const sortableScript = document.createElement('script');
+sortableScript.src = "https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js";
+sortableScript.onload = function() {
+  new Sortable(tilesList, {
+    animation: 150,
+    onEnd: function() {
+      clearClassesOnTiles();
+    }
+  });
+};
+document.head.appendChild(sortableScript);
+      renderTiles(shuffle(puzzle.itemsInCorrectOrder));
   </script>
 </body>
 </html>
